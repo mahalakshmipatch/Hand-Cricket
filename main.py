@@ -21,10 +21,12 @@ def coinToss(headsOrTails):
         print("Player 1 won the toss!")
         print("")
         print("-----------------------------------")
+        return True
     else:
         print("Player 2 won the toss!")
         print("")
         print("-----------------------------------")
+        return False
 
 
 def swapBatOrBall(batOrBall):
@@ -41,10 +43,13 @@ print("-----------------------------------")
 print("")
 headsOrTails = input("Do you call Heads or Tails?: ")
 print("")
-coinToss(headsOrTails)
 
 print("")
-batOrBall = input("Would you like to Bat or Ball?: ")
+if(coinToss(headsOrTails)):
+    batOrBall = input("Would you like to Bat or Ball?: ")
+else:
+    batOrBall = "Bat"
+    print("Player 2 has decided to Ball.")
 print("")
 
 if(batOrBall=="Bat"):
@@ -68,6 +73,12 @@ while(count<overs*6):
             count=0
             print(f"You are out. Now the opponent will bat.")
             print("")
+            print("------------------------")
+            print(f"Hit: {playerOne}")
+            print(f"Ball: {playerTwo}")
+            print(f"Balls Remining: 0")
+            print(f"Total Score: {playerOneScore}")
+            print("------------------------")
             print(f"Target for opponent: {playerOneScore}")
             print("")
             batOrBall = swapBatOrBall(batOrBall)
@@ -77,6 +88,7 @@ while(count<overs*6):
             print("------------------------")
             print(f"Hit: {playerOne}")
             print(f"Ball: {playerTwo}")
+            print(f"Balls Remining: {overs*6-count}")
             print(f"Total Score: {playerOneScore}")
             print("------------------------")
             batOrBall = swapBatOrBall(batOrBall)
@@ -87,13 +99,21 @@ while(count<overs*6):
 
         if(playerOne==playerTwo):
             count=0
-            print(f"You are out. Now opponent will ball.")
+            print(f"Player 2 is out.")
+            print("")
+            print("------------------------")
+            print(f"Hit: {playerOne}")
+            print(f"Ball: {playerTwo}")
+            print(f"Balls Remining: {overs*6-count}")
+            print(f"Total Score: {playerOneScore}")
+            print("------------------------")
             continue
         else:
             playerTwoScore = playerTwo+playerTwoScore
             print("------------------------")
             print(f"Hit: {playerTwo}")
             print(f"Ball: {playerOne}")
+            print(f"Balls Remining: {overs*6-count}")
             print(f"Total Score: {playerTwo}")
             print(f"Target for opponent: {playerOneScore}")
             print("------------------------")
