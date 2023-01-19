@@ -8,10 +8,10 @@ print("")
 print("---------------------------------")
 
 coin = ["Heads","Tails"]
-runs=[1,2,3,4,6]
+runs = [1,2,3,4,6]
 playerOneScore = 0
 playerTwoScore = 0 
-count=0
+count = 1
 
 #-------------------------------------------------------------
 
@@ -63,14 +63,14 @@ elif(batOrBall=="Ball"):
 
 
 
-while(count<overs*6):
+while(count<=overs*6):
     if(batOrBall=="Bat"):
         playerOne = int(input("Hit the ball:  "))
         print("")
         playerTwo = choice(runs)
 
         if(playerOne==playerTwo):
-            count=0
+            count = 1
             print(f"You are out. Now the opponent will bat.")
             print("")
             print("------------------------")
@@ -91,7 +91,12 @@ while(count<overs*6):
             print(f"Balls Remining: {overs*6-count}")
             print(f"Total Score: {playerOneScore}")
             print("------------------------")
-            batOrBall = swapBatOrBall(batOrBall)
+            if(count==overs*6):
+                count = 1
+                batOrBall = swapBatOrBall(batOrBall)
+                print("Now player 2 is batting.")
+                continue
+
     elif(batOrBall=="Ball"):
         playerTwo = choice(runs)
         playerOne = int(input("Throw Ball: "))
@@ -114,9 +119,11 @@ while(count<overs*6):
             print(f"Hit: {playerTwo}")
             print(f"Ball: {playerOne}")
             print(f"Balls Remining: {overs*6-count}")
-            print(f"Total Score: {playerTwo}")
-            print(f"Target for opponent: {playerOneScore}")
+            print(f"Total Score: {playerTwoScore}")
             print("------------------------")
+            if(playerTwoScore>playerOneScore):
+                print("Player 2 won this game!")
+                quit()
     count+=1
 
 if(playerOneScore<playerTwoScore):
